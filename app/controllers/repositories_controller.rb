@@ -44,7 +44,7 @@ class RepositoriesController < ApplicationController
       redirect_to @repository
     else
       flash[:alert] = @repository.errors.full_messages
-      render "new"
+      redirect_to new_repository_path
     end
   end
 

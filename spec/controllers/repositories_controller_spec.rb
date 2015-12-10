@@ -128,7 +128,7 @@ describe RepositoriesController do
         }
       end.not_to change(Repository, :count)
 
-      expect(response).to render_template("new")
+      expect(response).to redirect_to(new_repository_path)
     end
   end
 
