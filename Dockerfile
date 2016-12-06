@@ -7,6 +7,7 @@ EXPOSE 3000
 WORKDIR /portus
 COPY Gemfile* ./
 RUN bundle install --retry=3 && bundle binstubs phantomjs
+COPY source-aliyun.list  /etc/apt/sources.list
 RUN apt-get update && \
     apt-get install -y --no-install-recommends nodejs
 

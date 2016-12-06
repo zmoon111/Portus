@@ -18,6 +18,6 @@ notifications:
   endpoints:
     - name: portus
       url: http://EXTERNAL_IP:3000/v2/webhooks/events
-      timeout: 500ms
+      timeout: 5000ms
       threshold: 5
       backoff: 1s

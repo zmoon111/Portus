@@ -1,4 +1,4 @@
-source "https://rubygems.org"
+source "https://gems.ruby-china.org"
 
 gem "rails", "~> 4.2.6"
 gem "jquery-rails"

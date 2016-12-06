@@ -4,7 +4,9 @@ web:
   environment:
     - PORTUS_MACHINE_FQDN_VALUE=EXTERNAL_IP
     - PORTUS_DB_HOST=portus_db_1
+    - TZ=Asia/Shanghai
   volumes:
+    - /etc/localtime:/etc/localtime:ro
     - .:/portus
   ports:
     - 3000:3000
@@ -15,9 +17,12 @@ crono:
   image: portus_web
   entrypoint: bin/crono
   environment:
+    - TZ=Asia/Shanghai
     - PORTUS_MACHINE_FQDN=EXTERNAL_IP
     - PORTUS_DB_HOST=portus_db_1
+    - CATALOG_CRON=10.seconds
   volumes:
+    - /etc/localtime:/etc/localtime:ro
     - .:/portus
   links:
     - db
@@ -25,11 +30,17 @@ crono:
 db:
   image: library/mariadb:10.0.23
   environment:
-    MYSQL_ROOT_PASSWORD: portus
+    - TZ=Asia/Shanghai
+    - MYSQL_ROOT_PASSWORD=portus
+  volumes:
+    - /etc/localtime:/etc/localtime:ro
 
 registry:
   image: library/registry:2.3.1
+  environment:
+    - TZ=Asia/Shanghai
   volumes:
+    - /etc/localtime:/etc/localtime:ro
     - /registry_data
     - ./compose/registry/portus.crt:/etc/docker/registry/portus.crt:ro
     - ./compose/registry/config.yml:/etc/docker/registry/config.yml:ro
@@ -38,3 +49,4 @@ registry:
     - 5001:5001 # required to access debug service
   links:
     - web
+
